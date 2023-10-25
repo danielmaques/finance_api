@@ -79,6 +79,26 @@ paths:
       summary: Delete a transaction
       tags:
       - transactions
+    get:
+      consumes:
+      - application/json
+      description: Get a list of all transactions
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/schemas.TransactionResponse'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Get all transactions
+      tags:
+      - transactions
     post:
       consumes:
       - application/json

@@ -8,6 +8,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+
+// @BasePath /api/v1/transactions
+
+// @Summary Get all transactions
+// @Description Get a list of all transactions
+// @Tags transactions
+// @Accept json
+// @Produce json
+// @Success 200 {array} schemas.TransactionResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /api/v1/transactions [get]
 func ListAllTransactionsHandler(context *gin.Context) {
 	id := context.Query("id")
 
