@@ -18,7 +18,7 @@ func ListAllTransactionsHandler(context *gin.Context) {
 			sendError(context, http.StatusNotFound, fmt.Sprintf("transaction with id %s not found", id))
 			return
 		}
-	}else if err := db.Find(&transactions).Error; err != nil{
+	} else if err := db.Find(&transactions).Error; err != nil {
 		sendError(context, http.StatusInternalServerError, fmt.Sprintf("error listing transactions: %v", err))
 		return
 	}

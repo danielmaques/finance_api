@@ -7,6 +7,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @BasePath /api/v1/transactions
+
+// @Summary Create a new transaction
+// @Description Create a new transaction
+// @Tags transactions
+// @Accept json
+// @Produce json
+// @Param transaction body CreateTransactionRequest true "Request body"
+// @Success 200 {object} CreateResponse
+// @Failure 400,404 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /api/v1/transactions [post]
 func CreateTransactionHandler(context *gin.Context) {
 	request := CreateTransactionRequest{}
 

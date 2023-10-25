@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/danielmaques/finance_api/schemas"
 	"github.com/gin-gonic/gin"
 )
 
@@ -21,4 +22,14 @@ func sendSuccess(ctx *gin.Context, op string, data interface{}) {
 		"mensage": fmt.Sprintf("%s success", op),
 		"data":    data,
 	})
+}
+
+type ErrorResponse struct {
+	Message string `json:"message"`
+	Code    int    `json:"code"`
+}
+
+type CreateResponse struct {
+	Message string                      `json:"message"`
+	Data    schemas.TransactionResponse `json:"data"`
 }

@@ -1,4 +1,83 @@
+definitions:
+  handler.CreateResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.TransactionResponse'
+      message:
+        type: string
+    type: object
+  handler.CreateTransactionRequest:
+    properties:
+      add:
+        type: boolean
+      amount:
+        type: integer
+      category:
+        type: string
+      date:
+        type: string
+      description:
+        type: string
+    type: object
+  handler.ErrorResponse:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
+  schemas.TransactionResponse:
+    properties:
+      add:
+        type: boolean
+      amount:
+        type: integer
+      category:
+        type: string
+      created_at:
+        type: string
+      date:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+    type: object
 info:
   contact: {}
-paths: {}
+paths:
+  /api/v1/transactions:
+    post:
+      consumes:
+      - application/json
+      description: Create a new transaction
+      parameters:
+      - description: Request body
+        in: body
+        name: transaction
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateTransactionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.CreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Create a new transaction
+      tags:
+      - transactions
 swagger: "2.0"
