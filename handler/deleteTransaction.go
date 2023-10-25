@@ -8,6 +8,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @BasePath /api/v1/transactions
+
+// @Summary Delete a transaction
+// @Description Delete a transaction by ID
+// @Tags transactions
+// @Accept json
+// @Produce json
+// @Param id query string true "Transaction ID"
+// @Success 200 {object} CreateResponse
+// @Failure 400,404 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /api/v1/transactions [delete]
 func DeleteTransactionHandler(context *gin.Context) {
 	id := context.Query("id")
 
