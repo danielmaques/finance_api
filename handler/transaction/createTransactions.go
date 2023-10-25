@@ -16,9 +16,9 @@ import (
 // @Accept json
 // @Produce json
 // @Param transaction body CreateTransactionRequest true "Request body"
-// @Success 200 {object} CreateResponse
-// @Failure 400,404 {object} ErrorResponse
-// @Failure 500 {object} ErrorResponse
+// @Success 200 {object} handler.CreateResponse
+// @Failure 400,404 {object} handler.ErrorResponse
+// @Failure 500 {object} handler.ErrorResponse
 // @Router /api/v1/transactions [post]
 func CreateTransactionHandler(context *gin.Context) {
 	request := CreateTransactionRequest{}

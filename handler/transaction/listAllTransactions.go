@@ -17,7 +17,7 @@ import (
 // @Accept json
 // @Produce json
 // @Success 200 {array} schemas.TransactionResponse
-// @Failure 500 {object} ErrorResponse
+// @Failure 500 {object} handler.ErrorResponse
 // @Router /api/v1/transactions [get]
 func ListAllTransactionsHandler(context *gin.Context) {
 	id := context.Query("id")

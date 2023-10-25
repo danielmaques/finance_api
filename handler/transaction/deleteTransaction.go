@@ -17,9 +17,9 @@ import (
 // @Accept json
 // @Produce json
 // @Param id path string true "Transaction ID"
-// @Success 200 {object} CreateResponse
-// @Failure 400,404 {object} ErrorResponse
-// @Failure 500 {object} ErrorResponse
+// @Success 200 {object} handler.CreateResponse
+// @Failure 400,404 {object} handler.ErrorResponse
+// @Failure 500 {object} handler.ErrorResponse
 // @Router /api/v1/transactions/{id} [delete]
 func DeleteTransactionHandler(context *gin.Context) {
 	id := context.Param("id")
