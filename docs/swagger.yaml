@@ -1,31 +1,4 @@
 definitions:
-  handler.CreateResponse:
-    properties:
-      data:
-        $ref: '#/definitions/schemas.TransactionResponse'
-      message:
-        type: string
-    type: object
-  handler.CreateTransactionRequest:
-    properties:
-      add:
-        type: boolean
-      amount:
-        type: integer
-      category:
-        type: string
-      date:
-        type: string
-      description:
-        type: string
-    type: object
-  handler.ErrorResponse:
-    properties:
-      code:
-        type: integer
-      message:
-        type: string
-    type: object
   schemas.TransactionResponse:
     properties:
       add:
@@ -43,42 +16,37 @@ definitions:
       id:
         type: integer
     type: object
+  transaction.CreateResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.TransactionResponse'
+      message:
+        type: string
+    type: object
+  transaction.CreateTransactionRequest:
+    properties:
+      add:
+        type: boolean
+      amount:
+        type: integer
+      category:
+        type: string
+      date:
+        type: string
+      description:
+        type: string
+    type: object
+  transaction.ErrorResponse:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
 info:
   contact: {}
 paths:
   /api/v1/transactions:
-    delete:
-      consumes:
-      - application/json
-      description: Delete a transaction by ID
-      parameters:
-      - description: Transaction ID
-        in: query
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/handler.CreateResponse'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/handler.ErrorResponse'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/handler.ErrorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/handler.ErrorResponse'
-      summary: Delete a transaction
-      tags:
-      - transactions
     get:
       consumes:
       - application/json
@@ -95,7 +63,7 @@ paths:
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/transaction.ErrorResponse'
       summary: Get all transactions
       tags:
       - transactions
@@ -109,27 +77,60 @@ paths:
         name: transaction
         required: true
         schema:
-          $ref: '#/definitions/handler.CreateTransactionRequest'
+          $ref: '#/definitions/transaction.CreateTransactionRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handler.CreateResponse'
+            $ref: '#/definitions/transaction.CreateResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/transaction.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/transaction.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/handler.ErrorResponse'
+            $ref: '#/definitions/transaction.ErrorResponse'
       summary: Create a new transaction
+      tags:
+      - transactions
+  /api/v1/transactions/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a transaction by ID
+      parameters:
+      - description: Transaction ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/transaction.CreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/transaction.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/transaction.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/transaction.ErrorResponse'
+      summary: Delete a transaction
       tags:
       - transactions
 swagger: "2.0"

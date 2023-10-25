@@ -1,11 +1,11 @@
-package handler
+package transaction
 
 import (
 	"fmt"
 	"time"
 )
 
-func errParamsRequired(name, typ string) error {
+func errParamsTransactionRequired(name, typ string) error {
 	return fmt.Errorf("parameter %s is required of type %s", name, typ)
 }
 
@@ -23,19 +23,19 @@ func (r *CreateTransactionRequest) Validate() error {
 	}
 
 	if r.Category == "" {
-		return errParamsRequired("category", "string")
+		return errParamsTransactionRequired("category", "string")
 	}
 
 	if r.Description == "" {
-		return errParamsRequired("description", "string")
+		return errParamsTransactionRequired("description", "string")
 	}
 
 	if r.Amount <= 0 {
-		return errParamsRequired("amount", "int64")
+		return errParamsTransactionRequired("amount", "int64")
 	}
 
 	if r.Date.IsZero() {
-		return errParamsRequired("date", "time.Time")
+		return errParamsTransactionRequired("date", "time.Time")
 	}
 
 	return nil

@@ -1,8 +1,9 @@
-package handler
+package transaction
 
 import (
 	"net/http"
 
+	"github.com/danielmaques/finance_api/handler"
 	"github.com/danielmaques/finance_api/schemas"
 	"github.com/gin-gonic/gin"
 )
@@ -25,8 +26,8 @@ func CreateTransactionHandler(context *gin.Context) {
 	context.BindJSON(&request)
 
 	if err := request.Validate(); err != nil {
-		logger.Errorf("error validating request %v", err.Error())
-		sendError(context, http.StatusBadRequest, err.Error())
+		handler.Logger.Errorf("error validating request %v", err.Error())
+		handler.SendError(context, http.StatusBadRequest, err.Error())
 		return
 	}
 
@@ -38,12 +39,12 @@ func CreateTransactionHandler(context *gin.Context) {
 		Date:        request.Date,
 	}
 
-	if err := db.Create(&transaction).Error; err != nil {
-		logger.Errorf("error creating transaction %v", err.Error())
-		sendError(context, http.StatusInternalServerError, "error creating transaction")
+	if err := handler.DB.Create(&transaction).Error; err != nil {
+		handler.Logger.Errorf("error creating transaction %v", err.Error())
+		handler.SendError(context, http.StatusInternalServerError, "error creating transaction")
 		return
 	}
 
-	sendSuccess(context, "create transaction", transaction)
+	handler.SendSuccess(context, "create transaction", transaction)
 
 }
