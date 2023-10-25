@@ -19,6 +19,6 @@ func sendSuccess(ctx *gin.Context, op string, data interface{}) {
 	ctx.Header("Content-Type", "application/json")
 	ctx.JSON(http.StatusOK, gin.H{
 		"mensage": fmt.Sprintf("%s success", op),
-		"data":      data,
+		"data":    data,
 	})
 }

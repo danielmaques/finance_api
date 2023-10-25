@@ -12,7 +12,7 @@ func initializeRoutes(router *gin.Engine) {
 	{
 		v1.GET("/transactions", handler.ListAllTransactionsHandler)
 		v1.POST("/transactions", handler.CreateTransactionHandler)
-		v1.DELETE("/transactions/{id}", handler.DeleteTransactionHandler)
+		v1.DELETE("/transactions", handler.DeleteTransactionHandler)
 		v1.PUT("/transactions", handler.UpdateTransactionHandler)
 	}
 }
