@@ -3,11 +3,35 @@ package handler
 import (
 	"net/http"
 
+	"github.com/danielmaques/finance_api/schemas"
 	"github.com/gin-gonic/gin"
 )
 
 func CreateTransactionHandler(context *gin.Context) {
-	context.JSON(http.StatusOK, gin.H{
-		"message": "POST /api/v1/transactions",
-	})
+	request := CreateTransactionRequest{}
+
+	context.BindJSON(&request)
+
+	if err := request.Validate(); err != nil {
+		logger.Errorf("error validating request %v", err.Error())
+		sendError(context, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	transaction := schemas.Transaction{
+		Add:         request.Add,
+		Category:    request.Category,
+		Description: request.Description,
+		Amount:      request.Amount,
+		Date:        request.Date,
+	}
+
+	if err := db.Create(&transaction).Error; err != nil {
+		logger.Errorf("error creating transaction %v", err.Error())
+		sendError(context, http.StatusInternalServerError, "error creating transaction")
+		return
+	}
+
+	sendSuccess(context, "create transaction", transaction)
+
 }
