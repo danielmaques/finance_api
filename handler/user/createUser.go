@@ -55,8 +55,5 @@ func CreateUserHandler(context *gin.Context) {
 		return
 	}
 
-	// Não retorne a senha na resposta
-	user.Password = ""
-
 	handler.SendSuccess(context, "create user", user)
 }
