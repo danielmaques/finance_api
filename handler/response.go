@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/danielmaques/finance_api/schemas"
 	"github.com/gin-gonic/gin"
 )
 
@@ -30,6 +29,6 @@ type ErrorResponse struct {
 }
 
 type CreateResponse struct {
-	Message string                      `json:"message"`
-	Data    schemas.TransactionResponse `json:"data"`
+	Message string      `json:"message"`
+	Data    interface{} `json:"data"`
 }

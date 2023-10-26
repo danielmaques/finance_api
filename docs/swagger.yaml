@@ -1,8 +1,7 @@
 definitions:
   handler.CreateResponse:
     properties:
-      data:
-        $ref: '#/definitions/schemas.TransactionResponse'
+      data: {}
       message:
         type: string
     type: object

@@ -252,9 +252,7 @@ const docTemplate = `{
         "handler.CreateResponse": {
             "type": "object",
             "properties": {
-                "data": {
-                    "$ref": "#/definitions/schemas.TransactionResponse"
-                },
+                "data": {},
                 "message": {
                     "type": "string"
                 }
