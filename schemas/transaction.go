@@ -8,6 +8,7 @@ import (
 
 type Transaction struct {
 	gorm.Model
+	UserID      uint      `gorm:"not null"`
 	Add         bool
 	Category    string
 	Description string

@@ -312,6 +312,9 @@ const docTemplate = `{
                 },
                 "description": {
                     "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
                 }
             }
         },

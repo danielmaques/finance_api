@@ -10,6 +10,7 @@ func errParamsTransactionRequired(name, typ string) error {
 }
 
 type CreateTransactionRequest struct {
+	UserID      uint      `json:"user_id"`
 	Add         bool      `json:"add"`
 	Category    string    `json:"category"`
 	Description string    `json:"description"`
@@ -18,8 +19,13 @@ type CreateTransactionRequest struct {
 }
 
 func (r *CreateTransactionRequest) Validate() error {
+
 	if r.Category == "" && r.Description == "" && r.Amount == 0 && r.Date.IsZero() {
 		return fmt.Errorf("request body is empty")
+	}
+	
+	if r.UserID == 0 {
+		return errParamsTransactionRequired("user_id", "uint")
 	}
 
 	if r.Category == "" {

@@ -1,20 +1,22 @@
 package schemas
 
 import (
+	"time"
+
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
-	"time"
 )
 
 type User struct {
 	gorm.Model
-	Name     string
-	Email    string
-	Password string
+	Name         string
+	Email        string
+	Password     string
+	Transactions []Transaction `gorm:"foreignKey:UserID"`
 }
 
 type UserResponse struct {
-	ID           uint          `json:"id"`
+	ID           uint64        `json:"id"`
 	CreatedAt    time.Time     `json:"created_at"`
 	Transactions []Transaction `json:"transactions"`
 	Name         string        `json:"name"`

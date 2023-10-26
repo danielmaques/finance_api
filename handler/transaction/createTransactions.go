@@ -32,6 +32,7 @@ func CreateTransactionHandler(context *gin.Context) {
 	}
 
 	transaction := schemas.Transaction{
+		UserID:      request.UserID,
 		Add:         request.Add,
 		Category:    request.Category,
 		Description: request.Description,
