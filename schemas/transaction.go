@@ -8,7 +8,7 @@ import (
 
 type Transaction struct {
 	gorm.Model
-	UserID      uint      `gorm:"not null"`
+	UserID      uint64      `gorm:"not null"`
 	Add         bool
 	Category    string
 	Description string
@@ -17,7 +17,7 @@ type Transaction struct {
 }
 
 type TransactionResponse struct {
-	ID          uint      `json:"id"`
+	ID          uint64      `json:"id"`
 	CreatedAt   time.Time `json:"created_at"`
 	Add         bool      `json:"add"`
 	Category    string    `json:"category"`

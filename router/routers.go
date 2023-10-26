@@ -23,7 +23,6 @@ func initializeRoutes(router *gin.Engine) {
 		v1.DELETE("/transactions", transaction.DeleteTransactionHandler)
 		v1.PUT("/transactions", transaction.UpdateTransactionHandler)
 
-		v1.PUT("/user", user.UpdateUserHandler)
 		v1.GET("/user", user.GetUserHandler)
 		v1.DELETE("/user", user.DeleteUserHandler)
 		v1.POST("/user", user.CreateUserHandler)
