@@ -10,7 +10,7 @@ import (
 
 func InitializeSQLite() (*gorm.DB, error) {
 	logger := GetLogger("sqlite")
-	dbPath := "./db/transaction.db"
+	dbPath := "./db/finance.db"
 	_, err := os.Stat(dbPath)
 
 	if os.IsNotExist(err) {
@@ -28,7 +28,7 @@ func InitializeSQLite() (*gorm.DB, error) {
 		file.Close()
 	}
 
-	db, err := gorm.Open(sqlite.Open("./db/transaction.db"), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open("./db/finance.db"), &gorm.Config{})
 	if err != nil {
 		logger.Errorf("sqlite initialization error %v", err)
 		return nil, err
@@ -39,6 +39,12 @@ func InitializeSQLite() (*gorm.DB, error) {
 		logger.Errorf("sqlite migration error %v", err)
 		return nil, err
 	}
+
+	err = db.AutoMigrate(&schemas.User{})
+if err != nil {
+    logger.Errorf("sqlite migration error for users table %v", err)
+    return nil, err
+}
 
 	return db, nil
 
