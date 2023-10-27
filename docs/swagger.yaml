@@ -12,6 +12,11 @@ definitions:
       message:
         type: string
     type: object
+  house.CreateHouseRequest:
+    properties:
+      terms:
+        type: boolean
+    type: object
   schemas.TransactionResponse:
     properties:
       add:
@@ -39,10 +44,6 @@ definitions:
         type: integer
       name:
         type: string
-      transactions:
-        items:
-          $ref: '#/definitions/schemas.TransactionResponse'
-        type: array
     type: object
   transaction.CreateTransactionRequest:
     properties:
@@ -56,7 +57,7 @@ definitions:
         type: string
       description:
         type: string
-      user_id:
+      house_id:
         type: integer
     type: object
   user.CreateUserRequest:
@@ -71,6 +72,40 @@ definitions:
 info:
   contact: {}
 paths:
+  /api/v1/house:
+    post:
+      consumes:
+      - application/json
+      description: Create a new house
+      parameters:
+      - description: Request body
+        in: body
+        name: house
+        required: true
+        schema:
+          $ref: '#/definitions/house.CreateHouseRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.CreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Create a new house
+      tags:
+      - house
   /api/v1/transactions:
     get:
       consumes:

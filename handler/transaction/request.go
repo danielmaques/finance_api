@@ -10,7 +10,7 @@ func errParamsTransactionRequired(name, typ string) error {
 }
 
 type CreateTransactionRequest struct {
-	UserID      uint64      `json:"user_id"`
+	HouseID     uint64    `json:"house_id"`
 	Add         bool      `json:"add"`
 	Category    string    `json:"category"`
 	Description string    `json:"description"`
@@ -24,8 +24,8 @@ func (r *CreateTransactionRequest) Validate() error {
 		return fmt.Errorf("request body is empty")
 	}
 
-	if r.UserID == 0 {
-		return errParamsTransactionRequired("user_id", "uint64")
+	if r.HouseID == 0 {
+		return errParamsTransactionRequired("house_id", "uint64")
 	}
 
 	if r.Category == "" {

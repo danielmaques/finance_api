@@ -11,6 +11,7 @@ run:
 	@go run main.go
 
 run-with-docker:
+	@gofmt -w .
 	@swag init
 	@go run main.go
 

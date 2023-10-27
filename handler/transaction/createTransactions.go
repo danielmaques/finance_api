@@ -32,7 +32,7 @@ func CreateTransactionHandler(context *gin.Context) {
 	}
 
 	transaction := schemas.Transaction{
-		UserID:      request.UserID,
+		HouseID:     request.HouseID,
 		Add:         request.Add,
 		Category:    request.Category,
 		Description: request.Description,

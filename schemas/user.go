@@ -9,18 +9,17 @@ import (
 
 type User struct {
 	gorm.Model
-	Name         string
-	Email        string
-	Password     string
-	Transactions []Transaction `gorm:"foreignKey:UserID"`
+	HouseID  uint64 `gorm:"not null"`
+	Name     string
+	Email    string
+	Password string
 }
 
 type UserResponse struct {
-	ID           uint64                `json:"id"`
-	CreatedAt    time.Time             `json:"created_at"`
-	Transactions []TransactionResponse `json:"transactions"`
-	Name         string                `json:"name"`
-	Email        string                `json:"email"`
+	ID        uint64    `json:"id"`
+	CreatedAt time.Time `json:"created_at"`
+	Name      string    `json:"name"`
+	Email     string    `json:"email"`
 }
 
 // HashPassword cria um hash da senha usando bcrypt

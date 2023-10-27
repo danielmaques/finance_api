@@ -25,7 +25,7 @@ func InitializeSQLite() (*gorm.DB, error) {
 		if err != nil {
 			return nil, err
 		}
-		file.Close()
+		defer file.Close()
 	}
 
 	db, err := gorm.Open(sqlite.Open("./db/finance.db"), &gorm.Config{})
@@ -34,18 +34,26 @@ func InitializeSQLite() (*gorm.DB, error) {
 		return nil, err
 	}
 
-	err = db.AutoMigrate(&schemas.Transaction{})
-	if err != nil {
-		logger.Errorf("sqlite migration error %v", err)
-		return nil, err
-	}
-
+	// Migrate User
 	err = db.AutoMigrate(&schemas.User{})
 	if err != nil {
 		logger.Errorf("sqlite migration error for users table %v", err)
 		return nil, err
 	}
 
-	return db, nil
+	// Migrate Transaction
+	err = db.AutoMigrate(&schemas.Transaction{})
+	if err != nil {
+		logger.Errorf("sqlite migration error for transactions table %v", err)
+		return nil, err
+	}
 
+	// Migrate House
+	err = db.AutoMigrate(&schemas.House{})
+	if err != nil {
+		logger.Errorf("sqlite migration error for house table %v", err)
+		return nil, err
+	}
+
+	return db, nil
 }

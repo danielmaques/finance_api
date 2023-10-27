@@ -15,6 +15,58 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/api/v1/house": {
+            "post": {
+                "description": "Create a new house",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "house"
+                ],
+                "summary": "Create a new house",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "name": "house",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/house.CreateHouseRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handler.CreateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handler.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/handler.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/handler.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/transactions": {
             "get": {
                 "description": "Get a list of all transactions",
@@ -349,6 +401,14 @@ const docTemplate = `{
                 }
             }
         },
+        "house.CreateHouseRequest": {
+            "type": "object",
+            "properties": {
+                "terms": {
+                    "type": "boolean"
+                }
+            }
+        },
         "schemas.TransactionResponse": {
             "type": "object",
             "properties": {
@@ -389,12 +449,6 @@ const docTemplate = `{
                 },
                 "name": {
                     "type": "string"
-                },
-                "transactions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/schemas.TransactionResponse"
-                    }
                 }
             }
         },
@@ -416,7 +470,7 @@ const docTemplate = `{
                 "description": {
                     "type": "string"
                 },
-                "user_id": {
+                "house_id": {
                     "type": "integer"
                 }
             }
