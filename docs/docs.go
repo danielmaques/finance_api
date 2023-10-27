@@ -402,12 +402,7 @@ const docTemplate = `{
             }
         },
         "house.CreateHouseRequest": {
-            "type": "object",
-            "properties": {
-                "terms": {
-                    "type": "boolean"
-                }
-            }
+            "type": "object"
         },
         "schemas.TransactionResponse": {
             "type": "object",

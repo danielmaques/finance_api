@@ -8,13 +8,13 @@ import (
 
 type House struct {
 	gorm.Model
-	Terms        bool
-	Users        []User        `gorm:"foreignKey:HouseID"`
-	Transactions []Transaction `gorm:"foreignKey:HouseID"`
+	InviteCode string
+	Users      []User `gorm:"foreignKey:HouseID"`
 }
 
 type HouseResponse struct {
 	ID          uint64        `json:"id"`
+	InviteCode  string        `json:"invite_code"`
 	CreatedAt   time.Time     `json:"created_at"`
 	Balance     float64       `json:"balance"`
 	Users       []User        `json:"user"`

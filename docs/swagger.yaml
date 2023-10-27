@@ -13,9 +13,6 @@ definitions:
         type: string
     type: object
   house.CreateHouseRequest:
-    properties:
-      terms:
-        type: boolean
     type: object
   schemas.TransactionResponse:
     properties:
